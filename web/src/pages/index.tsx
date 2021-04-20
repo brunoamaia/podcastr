@@ -1,22 +1,16 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.scss'
+import Header from '../components/Header'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Podcastr</title>
-        <link rel="icon" href="/favicon.svg" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Podcastr
-        </h1>
-        
-      </main>
+      <Header />
 
-      <footer className={styles.footer}>
+      <footer>
       </footer>
     </div>
   )
