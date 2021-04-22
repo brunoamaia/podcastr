@@ -27,7 +27,12 @@ interface EpisodeProps {
 }
 
 export default function Episode({ episode }: EpisodeProps) {
+/*  // Gerar páginas com o "true"
   const router = useRouter()
+  if (router.isFallback) {
+    return <p>Carregando...</p>
+  } 
+*/
 
   return (
     <div className={styles.episode}>
@@ -47,7 +52,7 @@ export default function Episode({ episode }: EpisodeProps) {
           <img src="/play.svg" alt="tocar epsisódio" />
         </button>
       </div>
-      
+
       <header>
         <h1>{episode.title}</h1>
         <span>{episode.members}</span>
@@ -64,10 +69,35 @@ export default function Episode({ episode }: EpisodeProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const { data } = await api.get('episodes', {
+    params: {
+      _limit: 2,
+      _sort: 'published_at',
+      _order: 'desc'
+    }
+  })
+
+  const paths = data.map(episode => {
+    return {
+      params: {
+        slug: episode.id
+      }
+    }
+  })
+
   return {
-    paths: [],
+    paths,
     fallback: 'blocking'
   }
+
+/*
+  fallback: false => se a página não foi gerada na build, da erro 404
+
+  fallback: true => se a página não foi gerada na build, é criada apenas no navegador 
+
+  fallback: 'blocking' => se a página não foi gerada na build, é criada uma versão 
+    estática no servidor quando alguem acessar
+*/
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
