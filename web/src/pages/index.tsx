@@ -39,7 +39,7 @@ export default function Home({allEpisodes, latestEpisodes}: HomeProps) {
   return (
     <>
       <Head>
-        <title>Podcastr</title>
+        <title>Podcastr | Home</title>
       </Head>
 
       <div className={styles.homepage}>

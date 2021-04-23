@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { useRouter } from 'next/router'
+import Header from 'next/head'
 import Image from 'next/image'
 import { format, parseISO } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
@@ -39,6 +39,10 @@ export default function Episode({ episode }: EpisodeProps) {
 
   return (
     <div className={styles.episode}>
+      <Header>
+        <title> {episode.title} | Podcastr</title>
+      </Header>
+
       <div className={styles.thumbnailContainer}>
         <Link href="/">
           <button type="button">
