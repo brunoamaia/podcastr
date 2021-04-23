@@ -10,6 +10,9 @@ import styles from '../../styles/Episode.module.scss'
 import Link from 'next/link'
 import { usePLayer } from '../../contexts/PlayerContext'
 
+import localData from '../../../server'
+import { useEffect, useState } from 'react'
+
 
 interface Episode {
   description: string,
@@ -34,6 +37,16 @@ export default function Episode({ episode }: EpisodeProps) {
     return <p>Carregando...</p>
   } 
 */
+  
+/* const Product = ({ product }) => {
+  const [pageURL, setPageURL] = useState(0);
+   useEffect(() => setPageURL(window.location.href))
+   return (
+      <div>
+        <h3>{pageURL}</h3>
+       </div>
+   );
+ } */
 
   const { play } = usePLayer()
 
@@ -80,6 +93,10 @@ export default function Episode({ episode }: EpisodeProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  // A variável [paths] pode ser acessada por uma API ou a partir do arquivo local
+
+  /*
+  // consulta de dados via API
   const { data } = await api.get('episodes', {
     params: {
       _limit: 2,
@@ -94,7 +111,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
         slug: episode.id
       }
     }
-  })
+  }) 
+  */
+
+  // Consulta de dados no aquivo local [Foral do localhost]
+  var tempPaths = []  
+  for (let i = 0; i < localData.length; i++) {
+    tempPaths.push({ params: {slug: localData[i].id} })
+  }
+  const paths = tempPaths
 
   return {
     paths,
@@ -113,7 +138,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params
+  // A variável [data] pode ser acessada por uma API ou a partir do arquivo local
+  
+  /*
+  // consulta de dados via API [Dentro do localhost]
   const { data } = await api.get(`/episodes/${slug}`)
+  */
+
+  // Consulta de dados no aquivo local [Foral do localhost]
+  var indexData 
+  for (let i = 0; i < localData.length; i++) {
+    if (slug == localData[i].id ) {
+      indexData = i
+    }
+  }
+  const data = localData[indexData]
+
 
   const episode = {
     id: data.id,

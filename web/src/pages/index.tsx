@@ -132,6 +132,9 @@ export default function Home({allEpisodes, latestEpisodes}: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  // A variável [data] pode ser acessada por uma API ou a partir do arquivo local
+
+  /*
   // localhost [development] - access local server (json server)
   const { data } = await api.get('episodes', {
     params: {
@@ -140,9 +143,10 @@ export const getStaticProps: GetStaticProps = async () => {
       _order: 'desc'
     }
   })
+  */
 
-  /* // vercel (local data)
-  const data = localData */
+  // vercel (local data)
+  const data = localData
 
   const episodes = data.map(episode => {
     return {

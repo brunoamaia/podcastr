@@ -1,4 +1,18 @@
-const localData = [
+interface Episode {
+  id: string,
+  title: string,
+  members: string,
+  published_at: string,
+  thumbnail: string,
+  description: string,
+  file: {
+    url: string,
+    type: string,
+    duration: number
+  }
+}
+
+const localData:  Episode[]  = [
   {
     "id": "a-importancia-da-contribuicao-em-open-source",
     "title": "Faladev #30 | A importância da contribuição em Open Source",
@@ -132,4 +146,3 @@ const localData = [
 ]
 
 export default localData
-
