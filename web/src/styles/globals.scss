@@ -59,3 +59,12 @@ h2 {
 button {
   cursor: pointer;
 }
+
+button:focus {
+  outline: 0 !important;
+  box-shadow: none;
+}
+button:active {
+  outline: none;
+  border: none;
+}

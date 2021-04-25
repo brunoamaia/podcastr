@@ -69,15 +69,21 @@ export default function Player() {
     <div className={styles.playerContainer}>
       <header>
         <img src="/playing.svg" alt="tocando agora" />
-        <strong>Tocando agora{`:  ${episode?.title ?? ''}`} </strong>
-        
+        {episode ? (
+            <strong>{`Tocando agora: ${episode.title}`}</strong>
+          ) : (
+            <strong>Selecione um podcast para ouvir</strong>
+          )  
+        }
+        {episode? '' :<span></span>  /* Para ajustar o text ao centro*/} 
+
         {episode ? (
           <div className={styles.showPlayer}> 
-            <div 
+            <button 
               className={playerIsMinimized ? styles.playerMinimized : styles.playerMaximized}
             >
               <img src="/x.svg" alt="fechar display do player" onClick={togglePlayerState}/> 
-            </div>
+            </button>
           
           </div>
           )

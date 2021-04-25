@@ -145,51 +145,61 @@
 @media (max-width: 600px) {
   .playerContainer {
     position: absolute;
-    /* 
-    * Navegador do telefone cria um espaço extra ao forçar a rolagem no final 
-    * da página, por isso desse espaço adicional.
-    */
-    bottom: -5rem !important;
+    bottom: 0;
     
     padding: 1.5rem 1rem;
     height: fit-content;
     width: 100%;
     padding-bottom: 0;
+    border-top: 2px solid var(--green-500);
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    
     transition: 1s;
-
     z-index: 10;
     
     header {
       justify-content: space-around;
       width: 100%;
+
+      strong + span {
+        height: 32px;
+        width: 32px;
+      }
     }
 
     .showPlayer {
       display: block;
+      button {
+        background: none;
+        border: none;
+      }
     }
     .playerMaximized {
       transform: rotate(0deg);
-      animation: rotateToOpen 1s;
+      animation: rotateToOpen 1s ease-in-out;
 
       img {
-        filter: invert(0.35) sepia(1) saturate(80);
+        filter: invert(0.35) sepia(1) saturate(80) brightness(0.7);
       }
     }
     @keyframes rotateToOpen {
       0% {transform: rotate(45deg); filter: invert(0.35) sepia(1) saturate(5) hue-rotate(100deg);}
-      100% {transform: rotate(0deg); filter: invert(0.35) sepia(1) saturate(80);}
+      80% {filter: invert(0.35) sepia(1) saturate(5) hue-rotate(100deg);}
+      100% {transform: rotate(0deg); filter: invert(0.35) sepia(1) saturate(80) brightness(0.7);}
     }
 
     .playerMinimized {
       transform: rotate(45deg);
-      animation: rotateToClose 1s;
+      animation: rotateToClose 1s ease-in-out;
 
       img {
         filter: invert(0.35) sepia(1) saturate(5) hue-rotate(100deg);
       }
     }
     @keyframes rotateToClose {
-      0% {transform: rotate(0deg); filter: invert(0.35) sepia(1) saturate(80);}
+      0% {transform: rotate(0deg); filter: invert(0.35) sepia(1) saturate(80) brightness(0.7);}
+      80% {filter: invert(0.35) sepia(1) saturate(80) brightness(0.7);}
       100% {transform: rotate(45deg); filter: invert(0.35) sepia(1) saturate(5) hue-rotate(100deg);}
     }    
 
@@ -238,12 +248,18 @@
       gap: 2rem;
       margin-top: 1rem;
       padding: 0rem 0 2rem;
+      margin-bottom: 0;  
 
-      /* 
-      * Navegador do telefone cria um espaço extra ao forçar a rolagem no final 
-      * da página, por isso desse espaço adicional.
-      */
-      margin-bottom: 5rem;  
+      button {
+        
+        &.isActive {
+          filter: invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+        }
+    
+        &.isActive:hover {
+          filter: brightness(0.6) invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+        }
+      }
     }
 
     footer {

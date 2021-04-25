@@ -91,6 +91,8 @@
 @media (max-width: 600px) {
 
   .episode {
+    height: calc(100vh - (6.5rem + 170px));
+
     .thumbnailContainer {
       img {
         height: 200px;
@@ -109,19 +111,19 @@
         }
   
         &:last-child {
-          right: 0;
           top: 50%;
-          background-color: var(--green-500);
+          left: 50%;
           transform: translate(-50%, -50%);
+          background-color: var(--green-500);
         }
       }
     }
   }
 
   .spaceForPlayerMaximized {
-    height: 470px;
+    height: 290px;
   }
   .spaceForPlayerMinimized {
-    height: 220px;
+    height: 50px;
   }
 }

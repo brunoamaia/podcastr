@@ -240,8 +240,8 @@
         button {
           height: 2rem;
           width: 2rem;
-          background: var(--white);
-          border: 1px solid var(--gray-100);
+          background: var(--gray-100);
+          border: 1px solid var(--gray-200);
           border-radius: 0.5rem;
           font-size: 0;
           transition: 0.2s;
@@ -323,6 +323,10 @@
 } */
 
 @media (max-width: 600px) {
+  .homepage {
+    height: calc(100vh - (6.5rem + 170px));
+    padding: 0 2rem;
+  }
   .latestEpisodes {
     ul {
       display: flex;
@@ -395,6 +399,7 @@
         position: relative;
         flex-direction: column;
         justify-content: center;
+        align-items: flex-start;
         
         background-color: var(--white);
         border: 1px solid var(--gray-100);
@@ -415,16 +420,20 @@
 
         div:nth-child(2) {
           width: auto;
+          padding-bottom: 0.5rem;
         }
 
         div:nth-child(3) {
-          margin: 0 0 4rem; 
           width: auto;
+          margin: 0 0 4rem;
+          padding-top: 0; 
         }
 
         div:nth-child(4) {
           position: absolute;
           bottom: 1.1rem;
+          left: calc(50% + 0.5rem);
+          transform: translate(-50%, 0);
         }
         
         div:nth-child(5) {
@@ -435,17 +444,26 @@
 
         div:nth-child(6) {
           position: absolute;
-          bottom: 0.8rem;
+          bottom: 0.5rem;
           right: 0.1rem;
+
+          button {
+            height: 2.5rem;
+            width: 2.5rem;
+            img {
+              height: 1.5rem;
+              width: 1.5rem;
+            }
+          }
         }
       }
     }
   }
 
   .spaceForPlayerMaximized {
-    height: 470px;
+    height: 290px;
   }
   .spaceForPlayerMinimized {
-    height: 220px;
+    height: 50px;
   }
 }
