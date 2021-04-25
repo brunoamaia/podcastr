@@ -2,6 +2,8 @@
   max-width: 45rem;
   padding: 3rem 2rem;
   margin: 0 auto;
+  height: calc(100vh - 6.5rem);
+  overflow-y: scroll;
 
   .thumbnailContainer {
     position: relative;
@@ -82,5 +84,44 @@
     p {
       margin: 1.5rem 0;
     }
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .episode {
+    .thumbnailContainer {
+      img {
+        height: 200px;
+      }
+
+      button {
+        top: 100px;
+        left: 150px;
+
+        img {
+          height: 32px;
+        }
+
+        &:first-child {
+          display: none;
+        }
+  
+        &:last-child {
+          right: 0;
+          top: 50%;
+          background-color: var(--green-500);
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+
+  .spaceForPlayerMaximized {
+    height: 470px;
+  }
+  .spaceForPlayerMinimized {
+    height: 220px;
   }
 }

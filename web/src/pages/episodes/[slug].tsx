@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Header from 'next/head'
+import Head from 'next/head'
 import Image from 'next/image'
 import { format, parseISO } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
@@ -48,13 +48,13 @@ export default function Episode({ episode }: EpisodeProps) {
    );
  } */
 
-  const { play } = usePLayer()
+  const { playerIsMinimized, play } = usePLayer()
 
   return (
     <div className={styles.episode}>
-      <Header>
+      <Head>
         <title> {episode.title} | Podcastr</title>
-      </Header>
+      </Head>
 
       <div className={styles.thumbnailContainer}>
         <Link href="/">
@@ -88,6 +88,11 @@ export default function Episode({ episode }: EpisodeProps) {
         className={styles.description}
         dangerouslySetInnerHTML={{ __html: episode.description }}
       />
+
+      {playerIsMinimized 
+          ? <div className={styles.spaceForPlayerMinimized}></div>
+          : <div className={styles.spaceForPlayerMaximized}></div>
+        }
     </div>
   )
 }
