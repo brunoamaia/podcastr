@@ -8,6 +8,10 @@
   padding: 2rem 4rem;
   border-bottom: 1px solid var(--gray-100);
 
+  img {
+    cursor: pointer;
+  }
+
   p {
     margin-left: 2rem;
     padding: 0.25rem 0 0.25rem 2rem;
@@ -17,6 +21,25 @@
   span {
     margin-left: auto;
     text-transform: capitalize;
+  }
+}
+
+@media (max-width: 600px) {
+  .headerContainer {
+    justify-content: space-around;
+    padding: 2rem 2rem;
+    
+    p {
+      display: none;
+    }
+
+    span::before {
+      content: ' ';
+      position: relative;
+      padding: 0.5rem 0.25rem;
+      border-left: 1px solid var(--gray-100);
+    }
+
   }
 
 }

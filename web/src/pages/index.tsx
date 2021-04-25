@@ -31,8 +31,8 @@ interface HomeProps {
 
 // const hash = global.window && window.location.hash
 
-export default function Home({allEpisodes, latestEpisodes}: HomeProps) {
-  const { playList } = usePLayer()
+export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
+  const { playerIsMinimized, playList } = usePLayer()
 
   const episodeList = [...latestEpisodes, ...allEpisodes]
 
@@ -48,15 +48,17 @@ export default function Home({allEpisodes, latestEpisodes}: HomeProps) {
 
           <ul>
             {latestEpisodes.map((episode, index) => {
-              return(
+              return (
                 <li key={episode.duration}>
-                  <Image 
-                    width={192} 
-                    height={192} 
+                  {/* <Image 
+                    width={728} 
+                    height={409} 
                     src={episode.thumbnail} 
                     alt={episode.title}
                     objectFit="cover"
-                  />
+                  /> */}
+
+                  <img src={episode.thumbnail} alt={episode.title} />
 
                   <div className={styles.episodeDetails}>
                     <Link href={`/episodes/${episode.id}`}>
@@ -64,19 +66,65 @@ export default function Home({allEpisodes, latestEpisodes}: HomeProps) {
                     </Link>
                     <p>{episode.members}</p>
                     <span>{episode.publishedAt}</span>
-                    <span>{episode.durationAsString}</span> 
+                    <span>{episode.durationAsString}</span>
                   </div>
-                  
+
                   <button type="button" onClick={() => playList(episodeList, index)}>
-                    <img src="/play-green.svg" alt="tocar episódio"/>
-                  </button> 
+                    <img src="/play-green.svg" alt="tocar episódio" />
+                  </button>
                 </li>
               )
             })}
           </ul>
         </section>
 
-        <section className={styles.allEpisodes}>
+        <section className={styles.allEpisodesCard}>
+          <h2>Todos episódios</h2>
+
+          <div className={styles.tableHead}>
+            <div></div>
+            <div>Podcast</div>
+            <div>Integrantes</div>
+            <div>Data</div>
+            <div>Duração</div>
+            <div></div>
+          </div>
+
+          <div className={styles.tableItem}>
+            {allEpisodes.map((episode, index) => {
+              return (
+                <div className={styles.item} key={episode.id}>
+                  <div>
+                    <Image
+                      width={120}
+                      height={120}
+                      src={episode.thumbnail}
+                      alt={episode.title}
+                      objectFit="cover"
+                    />
+                  </div>
+                  <div>
+                    <Link href={`/episodes/${episode.id}`}>
+                      <a>{episode.title}</a>
+                    </Link></div>
+                  <div>{episode.members}</div>
+                  <div style={{ width: 100 }}>{episode.publishedAt}</div>
+                  <div>{episode.durationAsString}</div>
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => playList(episodeList, index + latestEpisodes.length)}
+                    >
+                      <img src="/play-green.svg" alt="tocar episódio" />
+                    </button>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* {<section className={styles.allEpisodesTable}>
           <h2>Todos episódios</h2>
 
           <table cellSpacing={0}>
@@ -90,34 +138,34 @@ export default function Home({allEpisodes, latestEpisodes}: HomeProps) {
                 <th></th>
               </tr>
             </thead>
-            
+
             <tbody>
-              {allEpisodes.map((episode, index) =>{
-                return(
+              {allEpisodes.map((episode, index) => {
+                return (
                   <tr key={episode.id}>
-                    <td style={{ width: 72}}>
-                      <Image 
-                        width={120} 
-                        height={120} 
-                        src={episode.thumbnail}  
+                    <td style={{ width: 72 }}>
+                      <Image
+                        width={120}
+                        height={120}
+                        src={episode.thumbnail}
                         alt={episode.title}
                         objectFit="cover"
                       />
                     </td>
                     <td>
                       <Link href={`/episodes/${episode.id}`}>
-                        <a>{episode.title}</a> 
+                        <a>{episode.title}</a>
                       </Link>
                     </td>
                     <td>{episode.members}</td>
-                    <td style={{ width: 100}} >{episode.publishedAt}</td>
+                    <td style={{ width: 100 }} >{episode.publishedAt}</td>
                     <td>{episode.durationAsString}</td>
                     <td>
-                      <button 
-                        type="button" 
+                      <button
+                        type="button"
                         onClick={() => playList(episodeList, index + latestEpisodes.length)}
                       >
-                        <img src="/play-green.svg" alt="tocar episódio"/>
+                        <img src="/play-green.svg" alt="tocar episódio" />
                       </button>
                     </td>
                   </tr>
@@ -125,7 +173,12 @@ export default function Home({allEpisodes, latestEpisodes}: HomeProps) {
               })}
             </tbody>
           </table>
-        </section>
+        </section>} */}
+
+        {playerIsMinimized 
+          ? <div className={styles.spaceForPlayerMinimized}></div>
+          : <div className={styles.spaceForPlayerMaximized}></div>
+        }
       </div>
     </>
   )

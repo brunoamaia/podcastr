@@ -20,12 +20,14 @@ export default function Player() {
     isLooping,
     isPlaying, 
     isShuffling,
+    playerIsMinimized,
     clearPlayerState,
     playNext,
     playPrevious,
     setplayingState,
     toggleLoop,
     togglePlay,
+    togglePlayerState,
     toggleShuffle 
   } = usePLayer()
 
@@ -67,14 +69,32 @@ export default function Player() {
     <div className={styles.playerContainer}>
       <header>
         <img src="/playing.svg" alt="tocando agora" />
-        <strong>Tocando agora {episode?.title} </strong>
+        <strong>Tocando agora{`:  ${episode?.title ?? ''}`} </strong>
+        
+        {episode ? (
+          <div className={styles.showPlayer}> 
+            <div 
+              className={playerIsMinimized ? styles.playerMinimized : styles.playerMaximized}
+            >
+              <img src="/x.svg" alt="fechar display do player" onClick={togglePlayerState}/> 
+            </div>
+          
+          </div>
+          )
+          : ('')
+        }
       </header>
 
       {episode ? (
-        <div className={styles.currentEpisode}>
+        <div 
+          className={episode && playerIsMinimized
+            ? styles.currentEpisodeEmpty 
+            : styles.currentEpisode
+          }
+        >
           <Image 
-            width={592} 
-            height={592}
+            width={728} 
+            height={409}
             src={episode.thumbnail}
             alt={episode.title}
             objectFit="cover"

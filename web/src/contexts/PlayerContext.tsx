@@ -16,6 +16,7 @@ interface PlayerContextData {
   isLooping: boolean,
   isPlaying: boolean,
   isShuffling: boolean,
+  playerIsMinimized: boolean,
   clearPlayerState: () => void,
   play: (episode: Episode) => void,
   playList: (List: Episode[], index: number) => void,
@@ -24,6 +25,7 @@ interface PlayerContextData {
   setplayingState: (state: boolean) => void,
   toggleLoop: () => void,
   togglePlay: () => void,
+  togglePlayerState: () => void,
   toggleShuffle: () => void,
 }
 
@@ -39,6 +41,7 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps){
   const [isLooping, setIsLooping] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isShuffling, setIsShuffling] = useState(false)
+  const [playerIsMinimized, setPlayerIsMinimized] = useState(true)
 
   function clearPlayerState() {
     setEpisodeList([])
@@ -49,12 +52,14 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps){
     setEpisodeList([episode])
     setCurrentEpisodeIndex(0)
     setIsPlaying(true)
+    setPlayerIsMinimized(false)
   }
 
   function playList(List: Episode[], index: number) {
     setEpisodeList(List)
     setCurrentEpisodeIndex(index)
     setIsPlaying(true)
+    setPlayerIsMinimized(false)
   }
 
   const hasNextEpisode = isShuffling || (currentEpisodeIndex + 1) < episodeList.length
@@ -72,6 +77,10 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps){
     if (hasPreviousEpisode) {
       setCurrentEpisodeIndex(currentEpisodeIndex - 1)
     }
+  }
+
+  function togglePlayerState(){
+    setPlayerIsMinimized(!playerIsMinimized)
   }
 
   function setplayingState(state: boolean) {
@@ -100,6 +109,7 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps){
         isLooping,
         isPlaying, 
         isShuffling,
+        playerIsMinimized,
         clearPlayerState,
         play,
         playList, 
@@ -108,6 +118,7 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps){
         setplayingState,
         toggleLoop,
         togglePlay, 
+        togglePlayerState,
         toggleShuffle
       }}
     >

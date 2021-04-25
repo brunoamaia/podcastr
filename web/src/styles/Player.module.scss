@@ -22,6 +22,10 @@
     font-weight: 600;
   }
 
+  .showPlayer {
+    display: none;
+  } 
+
   footer {
     align-self: stretch;
 
@@ -133,6 +137,117 @@
       &:hover:not(:disabled) {
         filter: brightness(0.95);
       }
+    }
+  }
+
+}
+
+@media (max-width: 600px) {
+  .playerContainer {
+    position: absolute;
+    /* 
+    * Navegador do telefone cria um espaço extra ao forçar a rolagem no final 
+    * da página, por isso desse espaço adicional.
+    */
+    bottom: -5rem !important;
+    
+    padding: 1.5rem 1rem;
+    height: fit-content;
+    width: 100%;
+    padding-bottom: 0;
+    transition: 1s;
+
+    z-index: 10;
+    
+    header {
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    .showPlayer {
+      display: block;
+    }
+    .playerMaximized {
+      transform: rotate(0deg);
+      animation: rotateToOpen 1s;
+
+      img {
+        filter: invert(0.35) sepia(1) saturate(80);
+      }
+    }
+    @keyframes rotateToOpen {
+      0% {transform: rotate(45deg); filter: invert(0.35) sepia(1) saturate(5) hue-rotate(100deg);}
+      100% {transform: rotate(0deg); filter: invert(0.35) sepia(1) saturate(80);}
+    }
+
+    .playerMinimized {
+      transform: rotate(45deg);
+      animation: rotateToClose 1s;
+
+      img {
+        filter: invert(0.35) sepia(1) saturate(5) hue-rotate(100deg);
+      }
+    }
+    @keyframes rotateToClose {
+      0% {transform: rotate(0deg); filter: invert(0.35) sepia(1) saturate(80);}
+      100% {transform: rotate(45deg); filter: invert(0.35) sepia(1) saturate(5) hue-rotate(100deg);}
+    }    
+
+    .currentEpisode {
+      padding-top: 0.8rem;
+      animation: openPlayer 1s;
+      height: 240px;
+  
+      img {
+        height: 46vw;
+        width: auto;
+      }
+  
+      strong {
+        display: none;
+      }
+    }
+    
+    @keyframes openPlayer {
+      0% {height: 0px; z-index: -1;}
+      100% {height: 240px; z-index: -1;}
+    }
+  
+    .currentEpisodeEmpty {
+      height: 0px;
+      animation: closePlayer 1s;
+
+      img, span, strong {
+        display: none !important;
+      }
+    }
+    @keyframes closePlayer {
+      0% {height: 240px;}
+      100% {height: 0;}
+    }
+
+    .emptyPlayer {
+      display: none;
+    }
+
+    .progress {
+      padding-top: 1rem;
+    }
+  
+    .buttons {
+      gap: 2rem;
+      margin-top: 1rem;
+      padding: 0rem 0 2rem;
+
+      /* 
+      * Navegador do telefone cria um espaço extra ao forçar a rolagem no final 
+      * da página, por isso desse espaço adicional.
+      */
+      margin-bottom: 5rem;  
+    }
+
+    footer {
+      background-color: var(--purple-500);
     }
   }
 
